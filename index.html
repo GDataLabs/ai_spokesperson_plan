@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Spokesperson Services Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e2a4a 0%, #2c3e50 50%, #34495e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            height: 50px;
+        }
+        
+        h1 {
+            color: #5ca9a5;
+            margin-bottom: 10px;
+            font-size: 2.8em;
+            background: linear-gradient(135deg, #5ca9a5, #1e2a4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        
+        .robot-icon {
+            display: inline-block;
+            font-size: 2em;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .content-section {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .content-section h2 {
+            color: #5ca9a5;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .content-section h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .content-section p, .content-section li {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .controls {
+            background: linear-gradient(135deg, #e8f7f6 0%, #d1f2f0 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #5ca9a5;
+        }
+        
+        .results {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #0984e3;
+        }
+        
+        .control-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 10px;
+            border-radius: 10px;
+            background: linear-gradient(to right, #5ca9a5 0%, #e74c3c 25%, #0984e3 75%, #fdcb6e 100%);
+            outline: none;
+            -webkit-appearance: none;
+            margin: 15px 0;
+            opacity: 0.8;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border: 3px solid #5ca9a5;
+            transition: all 0.3s;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .service-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #5ca9a5, #e74c3c, #0984e3);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .service-card.selected {
+            border-color: #5ca9a5;
+            background: linear-gradient(to bottom, #e8f7f6, #ffffff);
+            box-shadow: 0 3px 15px rgba(92, 169, 165, 0.2);
+        }
+        
+        .service-card.selected::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            filter: grayscale(0.7);
+            transition: filter 0.3s;
+        }
+        
+        .service-card.selected .service-icon {
+            filter: grayscale(0);
+        }
+        
+        .service-card h5 {
+            color: #2c3e50;
+            margin: 10px 0 5px 0;
+            font-size: 1em;
+            font-weight: 600;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-description {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin: 5px 0 15px 0;
+            min-height: 20px;
+        }
+        
+        .service-checkbox {
+            margin-top: 10px;
+        }
+        
+        .service-checkbox input[type="checkbox"] {
+            display: none;
+        }
+        
+        .service-checkbox label {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .service-card.selected .service-checkbox label {
+            background: #5ca9a5;
+            color: white;
+        }
+        
+        .service-count {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #5ca9a5;
+        }
+        
+        .value-display {
+            display: inline-block;
+            background: #5ca9a5;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            min-width: 70px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(92, 169, 165, 0.3);
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #bdc3c7;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .checkbox-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s;
+            z-index: 0;
+        }
+        
+        .checkbox-item.checked::before {
+            width: 100%;
+        }
+        
+        .checkbox-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .checkbox-item span {
+            z-index: 1;
+            position: relative;
+        }
+        
+        .checkbox-item.checked {
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding: 18px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .result-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .result-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .result-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(135deg, #5ca9a5, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(92, 169, 165, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .price-highlight::before {
+            content: '🤖';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+        }
+        
+        .price-highlight .result-value {
+            color: white;
+            font-size: 2.8em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+        
+        .price-highlight .result-label {
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            font-weight: 600;
+        }
+
+        .video-section {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .video-section-title {
+            color: #5ca9a5;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .video-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .video-card h5 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .video-card iframe, .video-card video {
+            width: 100%;
+            height: 315px;
+            border-radius: 10px;
+        }
+        
+        .api-costs-section {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .api-costs-title {
+            color: #5ca9a5;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .api-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .api-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+        
+        .api-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .api-tier {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .api-tier:last-child {
+            border-bottom: none;
+        }
+        
+        .tier-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .tier-price {
+            color: #667eea;
+            font-weight: 700;
+        }
+        
+        .breakdown {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 0 3px 20px rgba(0,0,0,0.08);
+        }
+        
+        .breakdown h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-top: 10px;
+            padding-top: 20px;
+            border-top: 2px solid #667eea;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e8f0ff 0%, #d4e7ff 100%);
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .info-box ul {
+            margin-left: 20px;
+            color: #34495e;
+        }
+        
+        .info-box li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .discount-notice {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            color: white;
+            padding: 18px;
+            border-radius: 15px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 3px 15px rgba(243, 156, 18, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .package-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .package-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #e8f7f6;
+            transition: all 0.3s;
+        }
+        
+        .package-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .package-card h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .package-card li {
+            padding: 5px 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .package-card li::before {
+            content: '✓ ';
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 968px) {
+            .main-grid,
+            .package-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .api-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                padding: 15px;
+            }
+            
+            .service-card h5 {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="cewd-logo.svg" alt="CEWD Logo" class="logo">
+                <img src="g-data-logo.svg" alt="G-Data Labs Logo" class="logo">
+            </div>
+            <div class="robot-icon">🤖</div>
+            <h1>AI Spokesperson Services Calculator</h1>
+            <p class="subtitle">Create engaging AI-powered video content with custom pricing estimates</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Executive Summary</h2>
+            <p>The AI avatar market has grown to $5.9 billion in 2023 with projected growth exceeding 30% annually. For the Center for Energy Workforce Development (CEWD), implementing an AI avatar spokesperson presents a powerful opportunity to enhance engagement, provide 24/7 career guidance, and maintain strict political neutrality across all energy sectors. This comprehensive analysis provides tiered implementation options, with deployment achievable by October 2025.</p>
+            <p>Based on extensive research, <strong>HeyGen emerges as the optimal platform</strong> for CEWD's needs, offering the best balance of interactive capabilities, educational focus, and reasonable pricing. The recommended Standard Tier implementation provides custom avatars, multi-language support, and comprehensive integration capabilities while maintaining political neutrality through robust governance frameworks.</p>
+            
+            <h2>Platform Analysis and Recommendations</h2>
+            <h3>Top AI Avatar Platforms Comparison</h3>
+            <ul>
+                <li><strong>HeyGen:</strong> Stands out with 500+ avatars, 175+ languages, and unique interactive capabilities. At $29-89/month for standard plans, it offers unlimited 5-minute videos on the Creator tier and real-time conversational avatars through WebRTC integration. The platform's strength lies in its educational focus and comprehensive API ecosystem.</li>
+                <li><strong>Synthesia:</strong> Leads the enterprise market with 230+ avatars supporting 140+ languages. Pricing ranges from $29/month (10 minutes) to custom enterprise solutions. Its advantages include SCORM export for LMS integration, SOC 2 compliance, and proven scalability with over 50,000 corporate users.</li>
+                <li><strong>Colossyan:</strong> Specifically targets educational and training applications with branching scenarios and interactive quizzes. At $19-70/month, it offers the most competitive pricing with unlimited minutes on higher tiers. The platform excels in creating scenario-based learning experiences.</li>
+                <li><strong>D-ID:</strong> Provides budget-friendly entry at $5.99/month, focusing on real-time conversational avatars with photo-to-avatar capabilities. Their strength lies in fast rendering (4x real-time) and innovative Natural User Interface technology.</li>
+            </ul>
+        </div>
+
+        <div class="video-section">
+            <h2 class="video-section-title">🎬 AI-Generated Video Demonstrations</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <h5>HeyGen Avatar IV Launch</h5>
+                    <iframe src="https://www.youtube.com/embed/HQ_QH0FnEsE" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <h5>Avatar Animation Demo</h5>
+                    <iframe src="https://www.youtube.com/embed/sDuzTelSmi0" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <h5>Official HeyGen Intro Video</h5>
+                    <iframe src="https://www.youtube.com/embed/RQVE4WPrczw" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Your Digital Brand Ambassador</h2>
+            <p>Our AI spokespersons serve as the perfect digital ambassadors for your organization, providing consistent, knowledgeable, and empathetic interactions at scale. Available 24/7 across all channels, they ensure your customers always receive immediate, accurate assistance.</p>
+            <div class="video-grid" style="grid-template-columns: 1fr;">
+                <div class="video-card">
+                    <h5>Synthesia AI Spokesperson Example</h5>
+                    <iframe src="https://share.synthesia.io/embeds/videos/674b0ef8-9b95-438f-99bc-d9d9a7926b65" loading="lazy" title="Synthesia video player - G-Data AI Spokesperson" allowfullscreen allow="encrypted-media; fullscreen;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2 class="video-section-title">🤖 AI-Generated Training Content</h2>
+            <p>AI-generated video content enhances engagement by providing personalized, interactive, and consistent training experiences. Dynamic content, such as tailored quizzes and real-time feedback, keeps learners focused and motivated. These videos can be updated instantly, ensuring the material is always current and relevant, which improves knowledge retention and skill development.</p>
+            <div class="video-grid">
+                <div class="video-card">
+                    <h5>AI-Powered Onboarding</h5>
+                    <video controls>
+                        <source src="ai_training_vid_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-card">
+                    <h5>Interactive Skill Development</h5>
+                    <video controls>
+                        <source src="ai_training_vid_2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Podcast Generation</h2>
+            <p>Convert avatar content to audio format for distribution on Spotify, Apple Podcasts, and other platforms. This extends reach to commute-time learning and provides flexible content consumption options.</p>
+            <audio controls style="width: 100%;">
+                <source src="ai_trades_jobs.wav" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div class="content-section">
+            <h2 class="video-section-title">AI Spokesperson Calculator</h2>
+        </div>
+        
+        <div class="main-grid">
+            <div class="controls">
+                <div class="control-group">
+                    <label>Select Service Packages: <span style="font-weight: normal; font-size: 0.9em; color: #7f8c8d;">(Click packages to include/exclude)</span></label>
+                    <div class="service-grid">
+                        <div class="service-card selected" data-service="content">
+                            <div class="service-icon">📝</div>
+                            <h5>Monthly Content Generation</h5>
+                            <p class="service-description">AI-generated scripts & content</p>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service-content" class="service-checkbox-input" checked>
+                                <label for="service-content">Included</label>
+                            </div>
+                        </div>
+                        <div class="service-card selected" data-service="video">
+                            <div class="service-icon">🎥</div>
+                            <h5>Video Spokesperson</h5>
+                            <p class="service-description">AI avatar videos with voiceover</p>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service-video" class="service-checkbox-input" checked>
+                                <label for="service-video">Included</label>
+                            </div>
+                        </div>
+                        <div class="service-card" data-service="interactive">
+                            <div class="service-icon">💬</div>
+                            <h5>Interactive AI Agent</h5>
+                            <p class="service-description">Real-time conversational avatar</p>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service-interactive" class="service-checkbox-input">
+                                <label for="service-interactive">Include</label>
+                            </div>
+                        </div>
+                        <div class="service-card" data-service="learning">
+                            <div class="service-icon">🎓</div>
+                            <h5>Interactive Learning Modules</h5>
+                            <p class="service-description">Educational content with AI tutor</p>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service-learning" class="service-checkbox-input">
+                                <label for="service-learning">Include</label>
+                            </div>
+                        </div>
+                        <div class="service-card" data-service="custom">
+                            <div class="service-icon">👤</div>
+                            <h5>Custom Avatar Creation</h5>
+                            <p class="service-description">Personalized AI spokesperson</p>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service-custom" class="service-checkbox-input">
+                                <label for="service-custom">Include</label>
+                            </div>
+                        </div>
+                        <div class="service-card" data-service="training">
+                            <div class="service-icon">🎯</div>
+                            <h5>AI Literacy Workshops</h5>
+                            <p class="service-description">Team training & education</p>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service-training" class="service-checkbox-input">
+                                <label for="service-training">Include</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-count">Selected Services: <span class="value-display" id="services-display">2</span></div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Select API Platforms:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item checked">
+                            <input type="checkbox" class="api-checkbox" value="heygen" checked>
+                            <span>HeyGen (Avatar Videos)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="api-checkbox" value="synthesia">
+                            <span>Synthesia (Professional Videos)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="api-checkbox" value="veo">
+                            <span>Google Veo (Advanced AI Video)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Development Rate: <span class="value-display" id="rate-display">$100</span>/hour</label>
+                    <input type="range" id="hourly-rate" min="100" max="150" value="100" step="5">
+                </div>
+                
+                <div class="control-group">
+                    <label>Monthly Content Volume: <span class="value-display" id="volume-display">Medium</span></label>
+                    <input type="range" id="content-volume" min="1" max="3" value="2" step="1">
+                </div>
+                
+                <div class="control-group">
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" id="apply-maintenance" checked>
+                        <span>Include ongoing maintenance & updates (20% monthly)</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="results">
+                <div class="result-item">
+                    <div class="result-label">Initial Setup Hours</div>
+                    <div class="result-value" id="setup-hours">40 hours</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">One-Time Setup Cost</div>
+                    <div class="result-value">$<span id="setup-cost">4,000</span></div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">Monthly API Costs</div>
+                    <div class="result-value">$<span id="api-costs">99</span></div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">Monthly Maintenance</div>
+                    <div class="result-value">$<span id="maintenance-cost">800</span></div>
+                </div>
+                
+                <div class="price-highlight">
+                    <div class="result-label">Total First Month</div>
+                    <div class="result-value">$<span id="first-month-total">4,899</span></div>
+                </div>
+                
+                <div class="price-highlight" style="background: linear-gradient(135deg, #e74c3c, #fdcb6e); margin-top: 15px;">
+                    <div class="result-label" style="color: rgba(255,255,255,0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.3); font-weight: 600;">Monthly Ongoing (After Setup)</div>
+                    <div class="result-value" style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 700;">$<span id="ongoing-monthly">899</span></div>
+                </div>
+                
+                <div id="maintenance-notice" class="discount-notice">
+                    🔧 Maintenance & Updates Included! 🔧
+                </div>
+                
+                <div id="api-complexity-notice" class="discount-notice" style="display: none; background: linear-gradient(135deg, #e74c3c, #fdcb6e);">
+                    ⚙️ Multiple API Integration - Enhanced Capabilities! ⚙️
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-costs-section">
+            <h2 class="api-costs-title">🛠️ API Platform Costs Breakdown</h2>
+            <div class="api-grid">
+                <div class="api-card">
+                    <h4>HeyGen API</h4>
+                    <div class="api-tier">
+                        <span class="tier-name">Free</span>
+                        <span class="tier-price">$0/month (10 credits)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Pro</span>
+                        <span class="tier-price">$99/month (100 credits)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Scale</span>
+                        <span class="tier-price">$330/month (660 credits)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Enterprise</span>
+                        <span class="tier-price">Custom Pricing</span>
+                    </div>
+                </div>
+                
+                <div class="api-card">
+                    <h4>Synthesia API</h4>
+                    <div class="api-tier">
+                        <span class="tier-name">Free</span>
+                        <span class="tier-price">$0/month (3 min)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Starter</span>
+                        <span class="tier-price">$29/month (10 min)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Creator</span>
+                        <span class="tier-price">$89/month (30 min)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Enterprise</span>
+                        <span class="tier-price">Custom Pricing</span>
+                    </div>
+                </div>
+                
+                <div class="api-card">
+                    <h4>Google Veo API</h4>
+                    <div class="api-tier">
+                        <span class="tier-name">AI Pro</span>
+                        <span class="tier-price">$20/month (limited)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">AI Ultra</span>
+                        <span class="tier-price">$250/month (unlimited)</span>
+                    </div>
+                    <div class="api-tier">
+                        <span class="tier-name">Pay-per-use</span>
+                        <span class="tier-price">$0.75/second</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="breakdown">
+            <h3>💰 Investment Breakdown</h3>
+            <div id="breakdown-details">
+                <div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;" id="selected-services-row">
+                    <span><strong>Selected Services:</strong> <span id="services-list">Monthly Content Generation, Video Spokesperson</span></span>
+                </div>
+                
+                <div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;" id="api-platforms-row">
+                    <span><strong>API Platforms:</strong> <span id="api-list">HeyGen</span></span>
+                </div>
+                
+                <div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                    <span><strong>Content Volume:</strong> <span id="volume-info">Medium (1x multiplier)</span></span>
+                </div>
+                
+                <div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d; display: none;" id="complexity-row">
+                    <span><strong>API Integration Complexity:</strong> <span id="complexity-info">2 platforms (1.15x multiplier)</span></span>
+                </div>
+                
+                <div class="breakdown-item">
+                    <span>Initial Setup & Development (<span id="breakdown-hours">45</span> hours × $<span id="breakdown-rate">100</span>/hour)</span>
+                    <span><strong>$<span id="breakdown-setup-cost">4,500</span></strong></span>
+                </div>
+                
+                <div class="breakdown-item" id="breakdown-api-row">
+                    <span>Monthly API Platform Costs</span>
+                    <span><strong>$<span id="breakdown-api-costs">99</span></strong></span>
+                </div>
+                
+                <div class="breakdown-item" id="breakdown-maintenance-row">
+                    <span>Monthly Maintenance & Updates</span>
+                    <span><strong>$<span id="breakdown-maintenance-cost">2,000</span></strong></span>
+                </div>
+                
+                <div class="breakdown-item">
+                    <span>Total First Month Investment</span>
+                    <span><strong>$<span id="breakdown-first-month">6,599</span></strong></span>
+                </div>
+                
+                <div class="breakdown-item">
+                    <span>Monthly Ongoing (After Setup)</span>
+                    <span><strong>$<span id="breakdown-ongoing">2,099</span></strong></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h4>🔧 What's Included in Setup & Development:</h4>
+            <ul>
+                <li><strong>API Integration (15-20 hours):</strong> Connect and configure selected AI platforms</li>
+                <li><strong>Custom Interface Development (20-25 hours):</strong> User-friendly control panels and dashboards</li>
+                <li><strong>Content Management System (10-15 hours):</strong> Easy content creation and scheduling tools</li>
+                <li><strong>Avatar Customization (8-12 hours):</strong> Brand-specific spokesperson setup and training</li>
+                <li><strong>Testing & Quality Assurance (5-8 hours):</strong> Comprehensive testing and optimization</li>
+                <li><strong>Training & Documentation (5-7 hours):</strong> User guides and team training sessions</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h4>⚙️ Multiple API Platform Benefits & Costs:</h4>
+            <ul>
+                <li><strong>Redundancy & Reliability:</strong> Backup options if one platform has issues</li>
+                <li><strong>Feature Optimization:</strong> Use the best platform for each specific use case</li>
+                <li><strong>Cost Optimization:</strong> Choose most economical option for different content types</li>
+                <li><strong>Additional Complexity:</strong> Multiple integrations require 15-30% more development and maintenance</li>
+                <li><strong>Enhanced Capabilities:</strong> Access to unique features from each platform</li>
+                <li><strong>Future-Proofing:</strong> Protection against single-vendor dependency</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h4>🎯 AI Literacy Workshop Details:</h4>
+            <ul>
+                <li><strong>Foundational Training (4 hours):</strong> Understanding AI technologies and capabilities</li>
+                <li><strong>Hands-on Platform Training (4 hours):</strong> Direct experience with your AI tools</li>
+                <li><strong>Best Practices Workshop (2 hours):</strong> Effective prompting and content creation</li>
+                <li><strong>Custom Workflow Design (2 hours):</strong> Tailored processes for your team</li>
+                <li><strong>Monthly Follow-up Sessions (4 hours/month):</strong> Ongoing support and advanced techniques</li>
+                <li><strong>Resource Library:</strong> Comprehensive guides, templates, and reference materials</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h4>📦 Service Package Details:</h4>
+            <div class="package-details">
+                <div class="package-card">
+                    <h5>Monthly Content Generation</h5>
+                    <ul>
+                        <li>AI-generated scripts and copy</li>
+                        <li>Content calendar management</li>
+                        <li>Brand voice consistency</li>
+                        <li>Multi-format content creation</li>
+                        <li>Performance analytics</li>
+                    </ul>
+                </div>
+                <div class="package-card">
+                    <h5>Video Spokesperson Package</h5>
+                    <ul>
+                        <li>Professional AI avatar videos</li>
+                        <li>Multiple spokesperson options</li>
+                        <li>Custom backgrounds and settings</li>
+                        <li>Multi-language support</li>
+                        <li>HD video output</li>
+                    </ul>
+                </div>
+                <div class="package-card">
+                    <h5>Interactive AI Agent</h5>
+                    <ul>
+                        <li>Real-time conversation capability</li>
+                        <li>Website integration</li>
+                        <li>24/7 customer support</li>
+                        <li>Natural language processing</li>
+                        <li>Custom knowledge base</li>
+                    </ul>
+                </div>
+                <div class="package-card">
+                    <h5>Interactive Learning Modules</h5>
+                    <ul>
+                        <li>Educational content creation</li>
+                        <li>Interactive assessments</li>
+                        <li>Progress tracking</li>
+                        <li>Adaptive learning paths</li>
+                        <li>Certification systems</li>
+                    </ul>
+                </div>
+                <div class="package-card">
+                    <h5>AI Literacy Workshops</h5>
+                    <ul>
+                        <li>Team training sessions</li>
+                        <li>AI tools & best practices</li>
+                        <li>Hands-on workshops</li>
+                        <li>Custom curriculum design</li>
+                        <li>Ongoing support & Q&A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Get all elements
+        const servicesDisplay = document.getElementById('services-display');
+        const hourlyRateSlider = document.getElementById('hourly-rate');
+        const rateDisplay = document.getElementById('rate-display');
+        const contentVolumeSlider = document.getElementById('content-volume');
+        const volumeDisplay = document.getElementById('volume-display');
+        const apiCheckboxes = document.querySelectorAll('.api-checkbox');
+        const serviceCheckboxes = document.querySelectorAll('.service-checkbox-input');
+        const serviceCards = document.querySelectorAll('.service-card');
+        const applyMaintenanceCheckbox = document.getElementById('apply-maintenance');
+        
+        const setupHoursEl = document.getElementById('setup-hours');
+        const setupCostEl = document.getElementById('setup-cost');
+        const apiCostsEl = document.getElementById('api-costs');
+        const maintenanceCostEl = document.getElementById('maintenance-cost');
+        const firstMonthTotalEl = document.getElementById('first-month-total');
+        const ongoingMonthlyEl = document.getElementById('ongoing-monthly');
+        const maintenanceNotice = document.getElementById('maintenance-notice');
+        const apiComplexityNotice = document.getElementById('api-complexity-notice');
+        
+        // Service development hours and complexities
+        const serviceData = {
+            content: {
+                name: 'Monthly Content Generation',
+                baseHours: 15,
+                monthlyHours: 8,
+                apiCost: 0
+            },
+            video: {
+                name: 'Video Spokesperson',
+                baseHours: 20,
+                monthlyHours: 12,
+                apiCost: 99
+            },
+            interactive: {
+                name: 'Interactive AI Agent',
+                baseHours: 30,
+                monthlyHours: 15,
+                apiCost: 99
+            },
+            learning: {
+                name: 'Interactive Learning Modules',
+                baseHours: 25,
+                monthlyHours: 10,
+                apiCost: 89
+            },
+            custom: {
+                name: 'Custom Avatar Creation',
+                baseHours: 15,
+                monthlyHours: 5,
+                apiCost: 250
+            },
+            training: {
+                name: 'AI Literacy Workshops',
+                baseHours: 12,
+                monthlyHours: 4,
+                apiCost: 0
+            }
+        };
+        
+        // API pricing data
+        const apiPricing = {
+            heygen: {
+                name: 'HeyGen',
+                cost: 99
+            },
+            synthesia: {
+                name: 'Synthesia',
+                cost: 89
+            },
+            veo: {
+                name: 'Google Veo',
+                cost: 250
+            }
+        };
+        
+        // Volume multipliers
+        const volumeMultipliers = {
+            1: { label: 'Light', multiplier: 0.7 },
+            2: { label: 'Medium', multiplier: 1.0 },
+            3: { label: 'Heavy', multiplier: 1.5 }
+        };
+        
+        // Calculate function
+        function calculate() {
+            const selectedServices = Array.from(serviceCheckboxes).filter(cb => cb.checked);
+            const services = selectedServices.length;
+            const hourlyRate = parseInt(hourlyRateSlider.value);
+            const selectedAPIs = Array.from(apiCheckboxes).filter(cb => cb.checked);
+            const volume = parseInt(contentVolumeSlider.value);
+            const volumeData = volumeMultipliers[volume];
+            const applyMaintenance = applyMaintenanceCheckbox.checked;
+            
+            // Update displays
+            servicesDisplay.textContent = services;
+            rateDisplay.textContent = `${hourlyRate}`;
+            volumeDisplay.textContent = volumeData.label;
+            
+            // Calculate API costs (additive for multiple platforms)
+            let totalApiCosts = 0;
+            selectedAPIs.forEach(checkbox => {
+                const apiKey = checkbox.value;
+                const apiInfo = apiPricing[apiKey];
+                if (apiInfo) {
+                    totalApiCosts += apiInfo.cost;
+                }
+            });
+            
+            // Add complexity charge for multiple API integrations
+            let apiComplexityMultiplier = 1.0;
+            if (selectedAPIs.length >= 3) {
+                apiComplexityMultiplier = 1.3; // 30% increase for 3 platforms
+            } else if (selectedAPIs.length >= 2) {
+                apiComplexityMultiplier = 1.15; // 15% increase for 2 platforms
+            }
+            
+            // Calculate setup hours
+            let setupHours = 10; // Base setup hours
+            selectedServices.forEach(checkbox => {
+                const serviceKey = checkbox.id.replace('service-', '');
+                const serviceInfo = serviceData[serviceKey];
+                if (serviceInfo) {
+                    setupHours += serviceInfo.baseHours;
+                }
+            });
+            
+            // Apply volume multiplier to setup
+            setupHours = Math.round(setupHours * volumeData.multiplier);
+            
+            // Apply API complexity multiplier for multiple integrations
+            setupHours = Math.round(setupHours * apiComplexityMultiplier);
+            
+            // Calculate monthly maintenance hours
+            let monthlyHours = 0;
+            selectedServices.forEach(checkbox => {
+                const serviceKey = checkbox.id.replace('service-', '');
+                const serviceInfo = serviceData[serviceKey];
+                if (serviceInfo) {
+                    monthlyHours += serviceInfo.monthlyHours;
+                }
+            });
+            monthlyHours = Math.round(monthlyHours * volumeData.multiplier);
+            
+            // Apply API complexity multiplier to maintenance hours
+            monthlyHours = Math.round(monthlyHours * apiComplexityMultiplier);
+            
+            // Calculate costs
+            const setupCost = setupHours * hourlyRate;
+            const maintenanceCost = applyMaintenance ? monthlyHours * hourlyRate : 0;
+            const firstMonthTotal = setupCost + totalApiCosts + maintenanceCost;
+            const ongoingMonthly = totalApiCosts + maintenanceCost;
+            
+            // Update displays
+            setupHoursEl.textContent = `${setupHours} hours`;
+            setupCostEl.textContent = `${setupCost.toLocaleString()}`;
+            apiCostsEl.textContent = `${totalApiCosts.toLocaleString()}`;
+            maintenanceCostEl.textContent = `${maintenanceCost.toLocaleString()}`;
+            firstMonthTotalEl.textContent = `${firstMonthTotal.toLocaleString()}`;
+            ongoingMonthlyEl.textContent = `${ongoingMonthly.toLocaleString()}`;
+            
+            // Show/hide maintenance notice
+            if (applyMaintenance) {
+                maintenanceNotice.style.display = 'block';
+            } else {
+                maintenanceNotice.style.display = 'none';
+            }
+            
+            // Show/hide API complexity notice
+            if (selectedAPIs.length >= 2) {
+                apiComplexityNotice.style.display = 'block';
+            } else {
+                apiComplexityNotice.style.display = 'none';
+            }
+            
+            // Update breakdown
+            updateBreakdown(services, setupHours, hourlyRate, setupCost, totalApiCosts, maintenanceCost, firstMonthTotal, ongoingMonthly, selectedServices, selectedAPIs, volumeData, apiComplexityMultiplier);
+        }
+        
+        // Update breakdown details
+        function updateBreakdown(services, setupHours, hourlyRate, setupCost, apiCosts, maintenanceCost, firstMonthTotal, ongoingMonthly, selectedServices, selectedAPIs, volumeData, apiComplexityMultiplier) {
+            let breakdownHTML = '';
+            
+            if (services > 0) {
+                // Show selected services
+                const serviceNames = selectedServices.map(cb => {
+                    const serviceKey = cb.id.replace('service-', '');
+                    return serviceData[serviceKey].name;
+                }).join(', ');
+                
+                breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                    <span><strong>Selected Services:</strong> ${serviceNames}</span>
+                </div>`;
+                
+                if (selectedAPIs.length > 0) {
+                    const apiNames = selectedAPIs.map(cb => apiPricing[cb.value].name).join(', ');
+                    breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                        <span><strong>API Platforms:</strong> ${apiNames}</span>
+                    </div>`;
+                }
+                
+                breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                    <span><strong>Content Volume:</strong> ${volumeData.label} (${volumeData.multiplier}x multiplier)</span>
+                </div>`;
+                
+                if (apiComplexityMultiplier > 1.0) {
+                    breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                        <span><strong>API Integration Complexity:</strong> ${selectedAPIs.length} platforms (${apiComplexityMultiplier}x multiplier)</span>
+                    </div>`;
+                }
+                
+                breakdownHTML += `<div class="breakdown-item">
+                    <span>Initial Setup & Development (${setupHours} hours × ${hourlyRate}/hour)</span>
+                    <span><strong>${setupCost.toLocaleString()}</strong></span>
+                </div>`;
+                
+                if (apiCosts > 0) {
+                    breakdownHTML += `<div class="breakdown-item">
+                        <span>Monthly API Platform Costs</span>
+                        <span><strong>${apiCosts.toLocaleString()}</strong></span>
+                    </div>`;
+                }
+                
+                if (maintenanceCost > 0) {
+                    breakdownHTML += `<div class="breakdown-item">
+                        <span>Monthly Maintenance & Updates</span>
+                        <span><strong>${maintenanceCost.toLocaleString()}</strong></span>
+                    </div>`;
+                }
+                
+                breakdownHTML += `<div class="breakdown-item">
+                    <span>Total First Month Investment</span>
+                    <span><strong>${firstMonthTotal.toLocaleString()}</strong></span>
+                </div>`;
+                
+                breakdownHTML += `<div class="breakdown-item">
+                    <span>Monthly Ongoing (After Setup)</span>
+                    <span><strong>${ongoingMonthly.toLocaleString()}</strong></span>
+                </div>`;
+                
+            } else {
+                breakdownHTML = '<p style="color: #7f8c8d; text-align: center;">Please select at least one service package to see pricing.</p>';
+            }
+            
+            breakdownDetails.innerHTML = breakdownHTML;
+        }
+        
+        // Update checkbox styling
+        function updateCheckboxStyles() {
+            apiCheckboxes.forEach(checkbox => {
+                const item = checkbox.closest('.checkbox-item');
+                if (checkbox.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+        }
+        
+        // Update service card styling
+        function updateServiceCards() {
+            serviceCards.forEach(card => {
+                const checkbox = card.querySelector('.service-checkbox-input');
+                const label = card.querySelector('.service-checkbox label');
+                if (checkbox.checked) {
+                    card.classList.add('selected');
+                    label.textContent = 'Included';
+                } else {
+                    card.classList.remove('selected');
+                    label.textContent = 'Include';
+                }
+            });
+        }
+        
+        // Event listeners
+        hourlyRateSlider.addEventListener('input', calculate);
+        contentVolumeSlider.addEventListener('input', calculate);
+        applyMaintenanceCheckbox.addEventListener('change', calculate);
+        
+        apiCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateCheckboxStyles();
+                calculate();
+            });
+        });
+        
+        // Service card click handlers
+        serviceCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't toggle if clicking on the checkbox label itself
+                if (e.target.tagName !== 'LABEL' && e.target.tagName !== 'INPUT') {
+                    const checkbox = card.querySelector('.service-checkbox-input');
+                    checkbox.checked = !checkbox.checked;
+                    updateServiceCards();
+                    calculate();
+                }
+            });
+        });
+        
+        serviceCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateServiceCards();
+                calculate();
+            });
+        });
+        
+        // Initial calculation
+        updateCheckboxStyles();
+        updateServiceCards();
+        calculate();
+    </script>
+</body>
+</html>
