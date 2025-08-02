@@ -3,106 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Spokesperson Services Calculator</title>
+    <title>AI Spokesperson Services for CEWD - Strategic Implementation Framework</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #f4f4f4;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1e2a4a 0%, #2c3e50 50%, #34495e 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #2c3e50;
-        }
-        
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            padding: 40px;
-            backdrop-filter: blur(10px);
+            width: 85%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 0;
         }
-        
-        .header {
+        header {
+            background: #004080;
+            color: #fff;
+            padding: 2rem 0;
             text-align: center;
-            margin-bottom: 40px;
+            border-bottom: 5px solid #5ca9a5;
             position: relative;
         }
-
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
         .logo-container {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 2rem;
+            left: 2rem;
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         .logo {
             height: 50px;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
         }
-        
-        h1 {
-            color: #5ca9a5;
+        nav {
+            background: #333;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: background 0.3s;
+            font-weight: 700;
+        }
+        nav ul li a:hover {
+            background: #004080;
+        }
+        .section {
+            background: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #004080;
+            border-bottom: 2px solid #5ca9a5;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: #333;
+            margin-top: 25px;
+            font-size: 1.4rem;
+        }
+        h4 {
+            color: #004080;
             margin-bottom: 10px;
-            font-size: 2.8em;
-            background: linear-gradient(135deg, #5ca9a5, #1e2a4a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.2rem;
         }
-        
-        .subtitle {
-            color: #7f8c8d;
+        .intro {
+            font-size: 1.1rem;
+            border-left: 4px solid #004080;
+            padding-left: 15px;
             margin-bottom: 20px;
-            font-size: 1.2em;
         }
-        
-        .robot-icon {
-            display: inline-block;
-            font-size: 2em;
-            animation: float 3s ease-in-out infinite;
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        .content-section {
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .table th {
+            background-color: #004080;
+            color: white;
+            font-weight: 700;
+        }
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table tr:hover {
+            background-color: #e9ecef;
+        }
+        .module {
+            border-left: 4px solid #5ca9a5;
+            padding-left: 15px;
+            margin-bottom: 25px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .video-section {
             background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
             padding: 40px;
             border-radius: 20px;
             margin: 40px 0;
         }
-
-        .content-section h2 {
+        .video-section-title {
             color: #5ca9a5;
             font-size: 2em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
         }
-
-        .content-section h3 {
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .video-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+        .video-card h5 {
             color: #667eea;
-            font-size: 1.5em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .content-section p, .content-section li {
-            color: #34495e;
-            line-height: 1.6;
             margin-bottom: 15px;
+            font-size: 1.3em;
         }
-
-        .content-section ul {
-            list-style-position: inside;
-            padding-left: 20px;
+        .video-card iframe, .video-card video {
+            width: 100%;
+            height: 315px;
+            border-radius: 10px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 15px;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        /* Calculator Styles */
+        .calculator-section {
+            background: linear-gradient(135deg, #e8f7f6 0%, #d1f2f0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #5ca9a5;
         }
         
         .main-grid {
@@ -113,10 +207,10 @@
         }
         
         .controls {
-            background: linear-gradient(135deg, #e8f7f6 0%, #d1f2f0 100%);
+            background: white;
             padding: 30px;
             border-radius: 20px;
-            border: 2px solid #5ca9a5;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
         }
         
         .results {
@@ -404,52 +498,6 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
             font-weight: 600;
         }
-
-        .video-section {
-            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-        }
-
-        .video-section-title {
-            color: #5ca9a5;
-            font-size: 2em;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .video-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-
-        .video-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-        }
-
-        .video-card h5 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .video-card iframe, .video-card video {
-            width: 100%;
-            height: 315px;
-            border-radius: 10px;
-        }
         
         .api-costs-section {
             background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
@@ -631,7 +679,19 @@
             margin-right: 5px;
         }
         
-        @media (max-width: 968px) {
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: #fff;
+            margin-top: 30px;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 10px;
+        }
+        
+        @media(max-width: 968px) {
             .main-grid,
             .package-details {
                 grid-template-columns: 1fr;
@@ -656,9 +716,28 @@
             .container {
                 padding: 20px;
             }
+            
+            .logo-container {
+                position: static;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
         }
         
-        @media (max-width: 600px) {
+        @media(max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            .container {
+                width: 95%;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media(max-width: 600px) {
             .service-grid {
                 grid-template-columns: 1fr;
             }
@@ -674,34 +753,92 @@
     </style>
 </head>
 <body>
+
+<header>
     <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <img src="cewd-logo.svg" alt="CEWD Logo" class="logo">
-                <img src="g-data-logo.svg" alt="G-Data Labs Logo" class="logo">
-            </div>
-            <div class="robot-icon">🤖</div>
-            <h1>AI Spokesperson Services Calculator</h1>
-            <p class="subtitle">Create engaging AI-powered video content with custom pricing estimates</p>
+        <div class="logo-container">
+            <img src="cewd-logo.svg" alt="CEWD Logo" class="logo">
+            <img src="g-data-logo.svg" alt="G-Data Labs Logo" class="logo">
         </div>
+        <h1>AI Spokesperson Services for CEWD</h1>
+        <p>Strategic Implementation Framework for Digital Brand Ambassadors</p>
+    </div>
+</header>
 
-        <div class="content-section">
-            <h2>Executive Summary</h2>
-            <p>The AI avatar market has grown to $5.9 billion in 2023 with projected growth exceeding 30% annually. For the Center for Energy Workforce Development (CEWD), implementing an AI avatar spokesperson presents a powerful opportunity to enhance engagement, provide 24/7 career guidance, and maintain strict political neutrality across all energy sectors. This comprehensive analysis provides tiered implementation options, with deployment achievable by October 2025.</p>
-            <p>Based on extensive research, <strong>HeyGen emerges as the optimal platform</strong> for CEWD's needs, offering the best balance of interactive capabilities, educational focus, and reasonable pricing. The recommended Standard Tier implementation provides custom avatars, multi-language support, and comprehensive integration capabilities while maintaining political neutrality through robust governance frameworks.</p>
-            
-            <h2>Platform Analysis and Recommendations</h2>
-            <h3>Top AI Avatar Platforms Comparison</h3>
-            <ul>
-                <li><strong>HeyGen:</strong> Stands out with 500+ avatars, 175+ languages, and unique interactive capabilities. At $29-89/month for standard plans, it offers unlimited 5-minute videos on the Creator tier and real-time conversational avatars through WebRTC integration. The platform's strength lies in its educational focus and comprehensive API ecosystem.</li>
-                <li><strong>Synthesia:</strong> Leads the enterprise market with 230+ avatars supporting 140+ languages. Pricing ranges from $29/month (10 minutes) to custom enterprise solutions. Its advantages include SCORM export for LMS integration, SOC 2 compliance, and proven scalability with over 50,000 corporate users.</li>
-                <li><strong>Colossyan:</strong> Specifically targets educational and training applications with branching scenarios and interactive quizzes. At $19-70/month, it offers the most competitive pricing with unlimited minutes on higher tiers. The platform excels in creating scenario-based learning experiences.</li>
-                <li><strong>D-ID:</strong> Provides budget-friendly entry at $5.99/month, focusing on real-time conversational avatars with photo-to-avatar capabilities. Their strength lies in fast rendering (4x real-time) and innovative Natural User Interface technology.</li>
-            </ul>
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#executive-summary">Executive Summary</a></li>
+            <li><a href="#platform-analysis">Platform Analysis</a></li>
+            <li><a href="#demonstrations">Demonstrations</a></li>
+            <li><a href="#calculator">Cost Calculator</a></li>
+            <li><a href="#implementation">Implementation</a></li>
+            <li><a href="#next-steps">Next Steps</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    
+    <!-- Executive Summary -->
+    <section id="executive-summary" class="section">
+        <h2>Executive Summary</h2>
+        <p class="intro">The AI avatar market has grown to $5.9 billion in 2023 with projected growth exceeding 30% annually. For the Center for Energy Workforce Development (CEWD), implementing an AI avatar spokesperson presents a powerful opportunity to enhance engagement, provide 24/7 career guidance, and maintain strict political neutrality across all energy sectors. This comprehensive analysis provides tiered implementation options, with deployment achievable by October 2025.</p>
+        
+        <p>Based on extensive research, <strong>HeyGen emerges as the optimal platform</strong> for CEWD's needs, offering the best balance of interactive capabilities, educational focus, and reasonable pricing. The recommended Standard Tier implementation provides custom avatars, multi-language support, and comprehensive integration capabilities while maintaining political neutrality through robust governance frameworks.</p>
+        
+        <h3>Key Benefits for CEWD</h3>
+        <ul>
+            <li><strong>24/7 Availability:</strong> Provide continuous career guidance and information to students and job seekers</li>
+            <li><strong>Scalability:</strong> Reach thousands of users simultaneously without additional personnel costs</li>
+            <li><strong>Consistency:</strong> Ensure uniform messaging across all interactions and platforms</li>
+            <li><strong>Political Neutrality:</strong> Maintain balanced perspectives across all energy sectors through programmatic governance</li>
+            <li><strong>Cost Efficiency:</strong> Reduce long-term operational costs while expanding service capabilities</li>
+        </ul>
+    </section>
+
+    <!-- Platform Analysis -->
+    <section id="platform-analysis" class="section">
+        <h2>Platform Analysis and Recommendations</h2>
+        
+        <h3>Top AI Avatar Platforms Comparison</h3>
+        <div class="module">
+            <h4>HeyGen (Recommended)</h4>
+            <p><strong>Strengths:</strong> Stands out with 500+ avatars, 175+ languages, and unique interactive capabilities. At $29-89/month for standard plans, it offers unlimited 5-minute videos on the Creator tier and real-time conversational avatars through WebRTC integration. The platform's strength lies in its educational focus and comprehensive API ecosystem.</p>
+            <p><strong>Best For:</strong> Organizations requiring interactive, educational content with strong API integration capabilities.</p>
         </div>
+        
+        <div class="module">
+            <h4>Synthesia</h4>
+            <p><strong>Strengths:</strong> Leads the enterprise market with 230+ avatars supporting 140+ languages. Pricing ranges from $29/month (10 minutes) to custom enterprise solutions. Its advantages include SCORM export for LMS integration, SOC 2 compliance, and proven scalability with over 50,000 corporate users.</p>
+            <p><strong>Best For:</strong> Large enterprises requiring compliance and LMS integration.</p>
+        </div>
+        
+        <div class="module">
+            <h4>Colossyan</h4>
+            <p><strong>Strengths:</strong> Specifically targets educational and training applications with branching scenarios and interactive quizzes. At $19-70/month, it offers the most competitive pricing with unlimited minutes on higher tiers. The platform excels in creating scenario-based learning experiences.</p>
+            <p><strong>Best For:</strong> Educational institutions focused on interactive learning modules.</p>
+        </div>
+        
+        <div class="module">
+            <h4>D-ID</h4>
+            <p><strong>Strengths:</strong> Provides budget-friendly entry at $5.99/month, focusing on real-time conversational avatars with photo-to-avatar capabilities. Their strength lies in fast rendering (4x real-time) and innovative Natural User Interface technology.</p>
+            <p><strong>Best For:</strong> Organizations with limited budgets seeking basic avatar capabilities.</p>
+        </div>
+    </section>
 
+    <!-- Video Demonstrations -->
+    <section id="demonstrations" class="section">
+        <h2>AI Spokesperson Demonstrations</h2>
+        
         <div class="video-section">
-            <h2 class="video-section-title">🎬 AI-Generated Video Demonstrations</h2>
+            <h2 class="video-section-title">🎬 AI Avatar Spokesperson Demos</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #34495e; font-size: 1.1em;">
+                These AI avatar spokespersons provide consistent, professional communication at scale. They enable CEWD to deliver 
+                personalized career guidance, training content, and industry information 24/7 across multiple languages, significantly 
+                reducing operational costs while expanding reach to diverse audiences. Each avatar can be customized to reflect CEWD's 
+                brand voice and maintain political neutrality across all energy sectors.
+            </p>
             <div class="video-grid">
                 <div class="video-card">
                     <h5>HeyGen Avatar IV Launch</h5>
@@ -717,9 +854,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="content-section">
-            <h2>Your Digital Brand Ambassador</h2>
+        
+        <div class="section">
+            <h3>Your Digital Brand Ambassador</h3>
             <p>Our AI spokespersons serve as the perfect digital ambassadors for your organization, providing consistent, knowledgeable, and empathetic interactions at scale. Available 24/7 across all channels, they ensure your customers always receive immediate, accurate assistance.</p>
             <div class="video-grid" style="grid-template-columns: 1fr;">
                 <div class="video-card">
@@ -728,7 +865,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="video-section">
             <h2 class="video-section-title">🤖 AI-Generated Training Content</h2>
             <p>AI-generated video content enhances engagement by providing personalized, interactive, and consistent training experiences. Dynamic content, such as tailored quizzes and real-time feedback, keeps learners focused and motivated. These videos can be updated instantly, ensuring the material is always current and relevant, which improves knowledge retention and skill development.</p>
@@ -749,156 +886,159 @@
                 </div>
             </div>
         </div>
-
-        <div class="content-section">
-            <h2>Podcast Generation</h2>
+        
+        <div class="section">
+            <h3>Podcast Generation Capabilities</h3>
             <p>Convert avatar content to audio format for distribution on Spotify, Apple Podcasts, and other platforms. This extends reach to commute-time learning and provides flexible content consumption options.</p>
-            <audio controls style="width: 100%;">
+            <audio controls>
                 <source src="ai_trades_jobs.wav" type="audio/wav">
                 Your browser does not support the audio element.
             </audio>
         </div>
+    </section>
 
-        <div class="content-section">
-            <h2 class="video-section-title">AI Spokesperson Calculator</h2>
-        </div>
+    <!-- Calculator Section -->
+    <section id="calculator" class="section">
+        <h2>AI Spokesperson Services Calculator</h2>
         
-        <div class="main-grid">
-            <div class="controls">
-                <div class="control-group">
-                    <label>Select Service Packages: <span style="font-weight: normal; font-size: 0.9em; color: #7f8c8d;">(Click packages to include/exclude)</span></label>
-                    <div class="service-grid">
-                        <div class="service-card selected" data-service="content">
-                            <div class="service-icon">📝</div>
-                            <h5>Monthly Content Generation</h5>
-                            <p class="service-description">AI-generated scripts & content</p>
-                            <div class="service-checkbox">
-                                <input type="checkbox" id="service-content" class="service-checkbox-input" checked>
-                                <label for="service-content">Included</label>
+        <div class="calculator-section">
+            <div class="main-grid">
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Select Service Packages: <span style="font-weight: normal; font-size: 0.9em; color: #7f8c8d;">(Click packages to include/exclude)</span></label>
+                        <div class="service-grid">
+                            <div class="service-card selected" data-service="content">
+                                <div class="service-icon">📝</div>
+                                <h5>Monthly Content Generation</h5>
+                                <p class="service-description">AI-generated scripts & content</p>
+                                <div class="service-checkbox">
+                                    <input type="checkbox" id="service-content" class="service-checkbox-input" checked>
+                                    <label for="service-content">Included</label>
+                                </div>
+                            </div>
+                            <div class="service-card selected" data-service="video">
+                                <div class="service-icon">🎥</div>
+                                <h5>Video Spokesperson</h5>
+                                <p class="service-description">AI avatar videos with voiceover</p>
+                                <div class="service-checkbox">
+                                    <input type="checkbox" id="service-video" class="service-checkbox-input" checked>
+                                    <label for="service-video">Included</label>
+                                </div>
+                            </div>
+                            <div class="service-card" data-service="interactive">
+                                <div class="service-icon">💬</div>
+                                <h5>Interactive AI Agent</h5>
+                                <p class="service-description">Real-time conversational avatar</p>
+                                <div class="service-checkbox">
+                                    <input type="checkbox" id="service-interactive" class="service-checkbox-input">
+                                    <label for="service-interactive">Include</label>
+                                </div>
+                            </div>
+                            <div class="service-card" data-service="learning">
+                                <div class="service-icon">🎓</div>
+                                <h5>Interactive Learning Modules</h5>
+                                <p class="service-description">Educational content with AI tutor</p>
+                                <div class="service-checkbox">
+                                    <input type="checkbox" id="service-learning" class="service-checkbox-input">
+                                    <label for="service-learning">Include</label>
+                                </div>
+                            </div>
+                            <div class="service-card" data-service="custom">
+                                <div class="service-icon">👤</div>
+                                <h5>Custom Avatar Creation</h5>
+                                <p class="service-description">Personalized AI spokesperson</p>
+                                <div class="service-checkbox">
+                                    <input type="checkbox" id="service-custom" class="service-checkbox-input">
+                                    <label for="service-custom">Include</label>
+                                </div>
+                            </div>
+                            <div class="service-card" data-service="training">
+                                <div class="service-icon">🎯</div>
+                                <h5>AI Literacy Workshops</h5>
+                                <p class="service-description">Team training & education</p>
+                                <div class="service-checkbox">
+                                    <input type="checkbox" id="service-training" class="service-checkbox-input">
+                                    <label for="service-training">Include</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="service-card selected" data-service="video">
-                            <div class="service-icon">🎥</div>
-                            <h5>Video Spokesperson</h5>
-                            <p class="service-description">AI avatar videos with voiceover</p>
-                            <div class="service-checkbox">
-                                <input type="checkbox" id="service-video" class="service-checkbox-input" checked>
-                                <label for="service-video">Included</label>
-                            </div>
-                        </div>
-                        <div class="service-card" data-service="interactive">
-                            <div class="service-icon">💬</div>
-                            <h5>Interactive AI Agent</h5>
-                            <p class="service-description">Real-time conversational avatar</p>
-                            <div class="service-checkbox">
-                                <input type="checkbox" id="service-interactive" class="service-checkbox-input">
-                                <label for="service-interactive">Include</label>
-                            </div>
-                        </div>
-                        <div class="service-card" data-service="learning">
-                            <div class="service-icon">🎓</div>
-                            <h5>Interactive Learning Modules</h5>
-                            <p class="service-description">Educational content with AI tutor</p>
-                            <div class="service-checkbox">
-                                <input type="checkbox" id="service-learning" class="service-checkbox-input">
-                                <label for="service-learning">Include</label>
-                            </div>
-                        </div>
-                        <div class="service-card" data-service="custom">
-                            <div class="service-icon">👤</div>
-                            <h5>Custom Avatar Creation</h5>
-                            <p class="service-description">Personalized AI spokesperson</p>
-                            <div class="service-checkbox">
-                                <input type="checkbox" id="service-custom" class="service-checkbox-input">
-                                <label for="service-custom">Include</label>
-                            </div>
-                        </div>
-                        <div class="service-card" data-service="training">
-                            <div class="service-icon">🎯</div>
-                            <h5>AI Literacy Workshops</h5>
-                            <p class="service-description">Team training & education</p>
-                            <div class="service-checkbox">
-                                <input type="checkbox" id="service-training" class="service-checkbox-input">
-                                <label for="service-training">Include</label>
-                            </div>
+                        <div class="service-count">Selected Services: <span class="value-display" id="services-display">2</span></div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Select API Platforms:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item checked">
+                                <input type="checkbox" class="api-checkbox" value="heygen" checked>
+                                <span>HeyGen (Avatar Videos)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" class="api-checkbox" value="synthesia">
+                                <span>Synthesia (Professional Videos)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" class="api-checkbox" value="veo">
+                                <span>Google Veo (Advanced AI Video)</span>
+                            </label>
                         </div>
                     </div>
-                    <div class="service-count">Selected Services: <span class="value-display" id="services-display">2</span></div>
-                </div>
-                
-                <div class="control-group">
-                    <label>Select API Platforms:</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-item checked">
-                            <input type="checkbox" class="api-checkbox" value="heygen" checked>
-                            <span>HeyGen (Avatar Videos)</span>
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" class="api-checkbox" value="synthesia">
-                            <span>Synthesia (Professional Videos)</span>
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" class="api-checkbox" value="veo">
-                            <span>Google Veo (Advanced AI Video)</span>
+                    
+                    <div class="control-group">
+                        <label>Development Rate: <span class="value-display" id="rate-display">$100</span>/hour</label>
+                        <input type="range" id="hourly-rate" min="100" max="150" value="100" step="5">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Monthly Content Volume: <span class="value-display" id="volume-display">Medium</span></label>
+                        <input type="range" id="content-volume" min="1" max="3" value="2" step="1">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="apply-maintenance" checked>
+                            <span>Include ongoing maintenance & updates (20% monthly)</span>
                         </label>
                     </div>
                 </div>
                 
-                <div class="control-group">
-                    <label>Development Rate: <span class="value-display" id="rate-display">$100</span>/hour</label>
-                    <input type="range" id="hourly-rate" min="100" max="150" value="100" step="5">
-                </div>
-                
-                <div class="control-group">
-                    <label>Monthly Content Volume: <span class="value-display" id="volume-display">Medium</span></label>
-                    <input type="range" id="content-volume" min="1" max="3" value="2" step="1">
-                </div>
-                
-                <div class="control-group">
-                    <label style="display: flex; align-items: center; gap: 10px;">
-                        <input type="checkbox" id="apply-maintenance" checked>
-                        <span>Include ongoing maintenance & updates (20% monthly)</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="results">
-                <div class="result-item">
-                    <div class="result-label">Initial Setup Hours</div>
-                    <div class="result-value" id="setup-hours">40 hours</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-label">One-Time Setup Cost</div>
-                    <div class="result-value">$<span id="setup-cost">4,000</span></div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-label">Monthly API Costs</div>
-                    <div class="result-value">$<span id="api-costs">99</span></div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-label">Monthly Maintenance</div>
-                    <div class="result-value">$<span id="maintenance-cost">800</span></div>
-                </div>
-                
-                <div class="price-highlight">
-                    <div class="result-label">Total First Month</div>
-                    <div class="result-value">$<span id="first-month-total">4,899</span></div>
-                </div>
-                
-                <div class="price-highlight" style="background: linear-gradient(135deg, #e74c3c, #fdcb6e); margin-top: 15px;">
-                    <div class="result-label" style="color: rgba(255,255,255,0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.3); font-weight: 600;">Monthly Ongoing (After Setup)</div>
-                    <div class="result-value" style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 700;">$<span id="ongoing-monthly">899</span></div>
-                </div>
-                
-                <div id="maintenance-notice" class="discount-notice">
-                    🔧 Maintenance & Updates Included! 🔧
-                </div>
-                
-                <div id="api-complexity-notice" class="discount-notice" style="display: none; background: linear-gradient(135deg, #e74c3c, #fdcb6e);">
-                    ⚙️ Multiple API Integration - Enhanced Capabilities! ⚙️
+                <div class="results">
+                    <div class="result-item">
+                        <div class="result-label">Initial Setup Hours</div>
+                        <div class="result-value" id="setup-hours">40 hours</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">One-Time Setup Cost</div>
+                        <div class="result-value">$<span id="setup-cost">4,000</span></div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">Monthly API Costs</div>
+                        <div class="result-value">$<span id="api-costs">99</span></div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">Monthly Maintenance</div>
+                        <div class="result-value">$<span id="maintenance-cost">800</span></div>
+                    </div>
+                    
+                    <div class="price-highlight">
+                        <div class="result-label">Total First Month</div>
+                        <div class="result-value">$<span id="first-month-total">4,899</span></div>
+                    </div>
+                    
+                    <div class="price-highlight" style="background: linear-gradient(135deg, #e74c3c, #fdcb6e); margin-top: 15px;">
+                        <div class="result-label" style="color: rgba(255,255,255,0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.3); font-weight: 600;">Monthly Ongoing (After Setup)</div>
+                        <div class="result-value" style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 700;">$<span id="ongoing-monthly">899</span></div>
+                    </div>
+                    
+                    <div id="maintenance-notice" class="discount-notice">
+                        🔧 Maintenance & Updates Included! 🔧
+                    </div>
+                    
+                    <div id="api-complexity-notice" class="discount-notice" style="display: none; background: linear-gradient(135deg, #e74c3c, #fdcb6e);">
+                        ⚙️ Multiple API Integration - Enhanced Capabilities! ⚙️
+                    </div>
                 </div>
             </div>
         </div>
@@ -1101,318 +1241,422 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section id="implementation" class="section">
+        <h2>Implementation Timeline</h2>
+        
+        <h3>Phase 1: Discovery & Planning (Weeks 1-2)</h3>
+        <ul>
+            <li>Define specific use cases and objectives for CEWD</li>
+            <li>Conduct stakeholder interviews and requirements gathering</li>
+            <li>Technical infrastructure assessment</li>
+            <li>Create detailed project roadmap</li>
+        </ul>
+        
+        <h3>Phase 2: Development & Integration (Weeks 3-6)</h3>
+        <ul>
+            <li>Set up chosen AI platform accounts and APIs</li>
+            <li>Develop custom avatar personas aligned with CEWD brand</li>
+            <li>Create initial content library and scripts</li>
+            <li>Build integration with existing CEWD systems</li>
+        </ul>
+        
+        <h3>Phase 3: Testing & Refinement (Weeks 7-8)</h3>
+        <ul>
+            <li>Internal testing with CEWD team</li>
+            <li>Focus group sessions with target audiences</li>
+            <li>Content and interaction refinement</li>
+            <li>Performance optimization</li>
+        </ul>
+        
+        <h3>Phase 4: Launch & Training (Week 9-10)</h3>
+        <ul>
+            <li>Staff training on AI spokesperson management</li>
+            <li>Soft launch with limited audience</li>
+            <li>Monitor performance and gather feedback</li>
+            <li>Full public launch</li>
+        </ul>
+        
+        <h3>Phase 5: Optimization & Scaling (Ongoing)</h3>
+        <ul>
+            <li>Monthly performance reviews</li>
+            <li>Content updates and expansion</li>
+            <li>Feature enhancements based on user feedback</li>
+            <li>Expansion to additional use cases</li>
+        </ul>
+    </section>
+
+    <!-- Next Steps -->
+    <section id="next-steps" class="section">
+        <h2>Recommended Next Steps</h2>
+        
+        <div class="module">
+            <h4>1. Strategic Planning Session</h4>
+            <p>Schedule a comprehensive planning session with key CEWD stakeholders to:</p>
+            <ul>
+                <li>Define specific objectives and success metrics</li>
+                <li>Identify primary use cases and audience segments</li>
+                <li>Establish governance framework for content approval</li>
+                <li>Set budget parameters and timeline expectations</li>
+            </ul>
+        </div>
+        
+        <div class="module">
+            <h4>2. Platform Evaluation</h4>
+            <p>Conduct hands-on evaluation of recommended platforms:</p>
+            <ul>
+                <li>Request demo accounts from HeyGen and alternatives</li>
+                <li>Test avatar creation and customization capabilities</li>
+                <li>Evaluate API documentation and integration options</li>
+                <li>Compare pricing models for anticipated usage</li>
+            </ul>
+        </div>
+        
+        <div class="module">
+            <h4>3. Pilot Program Development</h4>
+            <p>Design a limited pilot program to validate approach:</p>
+            <ul>
+                <li>Select 2-3 high-impact use cases for initial deployment</li>
+                <li>Create prototype content and interactions</li>
+                <li>Define success criteria and measurement approach</li>
+                <li>Establish feedback collection mechanisms</li>
+            </ul>
+        </div>
+        
+        <div class="module">
+            <h4>4. Budget Approval & Resource Allocation</h4>
+            <p>Prepare for implementation:</p>
+            <ul>
+                <li>Finalize budget based on selected service tier</li>
+                <li>Allocate internal resources for project management</li>
+                <li>Identify content creation and maintenance team</li>
+                <li>Establish vendor relationships and contracts</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>CEWD AI Spokesperson Services | Strategic Implementation Framework | 2025</p>
+</footer>
+
+<script>
+    // Get all elements
+    const servicesDisplay = document.getElementById('services-display');
+    const hourlyRateSlider = document.getElementById('hourly-rate');
+    const rateDisplay = document.getElementById('rate-display');
+    const contentVolumeSlider = document.getElementById('content-volume');
+    const volumeDisplay = document.getElementById('volume-display');
+    const apiCheckboxes = document.querySelectorAll('.api-checkbox');
+    const serviceCheckboxes = document.querySelectorAll('.service-checkbox-input');
+    const serviceCards = document.querySelectorAll('.service-card');
+    const applyMaintenanceCheckbox = document.getElementById('apply-maintenance');
     
-    <script>
-        // Get all elements
-        const servicesDisplay = document.getElementById('services-display');
-        const hourlyRateSlider = document.getElementById('hourly-rate');
-        const rateDisplay = document.getElementById('rate-display');
-        const contentVolumeSlider = document.getElementById('content-volume');
-        const volumeDisplay = document.getElementById('volume-display');
-        const apiCheckboxes = document.querySelectorAll('.api-checkbox');
-        const serviceCheckboxes = document.querySelectorAll('.service-checkbox-input');
-        const serviceCards = document.querySelectorAll('.service-card');
-        const applyMaintenanceCheckbox = document.getElementById('apply-maintenance');
+    const setupHoursEl = document.getElementById('setup-hours');
+    const setupCostEl = document.getElementById('setup-cost');
+    const apiCostsEl = document.getElementById('api-costs');
+    const maintenanceCostEl = document.getElementById('maintenance-cost');
+    const firstMonthTotalEl = document.getElementById('first-month-total');
+    const ongoingMonthlyEl = document.getElementById('ongoing-monthly');
+    const maintenanceNotice = document.getElementById('maintenance-notice');
+    const apiComplexityNotice = document.getElementById('api-complexity-notice');
+    
+    // Get breakdown elements
+    const breakdownDetails = document.getElementById('breakdown-details');
+    
+    // Service development hours and complexities
+    const serviceData = {
+        content: {
+            name: 'Monthly Content Generation',
+            baseHours: 15,
+            monthlyHours: 8,
+            apiCost: 0
+        },
+        video: {
+            name: 'Video Spokesperson',
+            baseHours: 20,
+            monthlyHours: 12,
+            apiCost: 99
+        },
+        interactive: {
+            name: 'Interactive AI Agent',
+            baseHours: 30,
+            monthlyHours: 15,
+            apiCost: 99
+        },
+        learning: {
+            name: 'Interactive Learning Modules',
+            baseHours: 25,
+            monthlyHours: 10,
+            apiCost: 89
+        },
+        custom: {
+            name: 'Custom Avatar Creation',
+            baseHours: 15,
+            monthlyHours: 5,
+            apiCost: 250
+        },
+        training: {
+            name: 'AI Literacy Workshops',
+            baseHours: 12,
+            monthlyHours: 4,
+            apiCost: 0
+        }
+    };
+    
+    // API pricing data
+    const apiPricing = {
+        heygen: {
+            name: 'HeyGen',
+            cost: 99
+        },
+        synthesia: {
+            name: 'Synthesia',
+            cost: 89
+        },
+        veo: {
+            name: 'Google Veo',
+            cost: 250
+        }
+    };
+    
+    // Volume multipliers
+    const volumeMultipliers = {
+        1: { label: 'Light', multiplier: 0.7 },
+        2: { label: 'Medium', multiplier: 1.0 },
+        3: { label: 'Heavy', multiplier: 1.5 }
+    };
+    
+    // Calculate function
+    function calculate() {
+        const selectedServices = Array.from(serviceCheckboxes).filter(cb => cb.checked);
+        const services = selectedServices.length;
+        const hourlyRate = parseInt(hourlyRateSlider.value);
+        const selectedAPIs = Array.from(apiCheckboxes).filter(cb => cb.checked);
+        const volume = parseInt(contentVolumeSlider.value);
+        const volumeData = volumeMultipliers[volume];
+        const applyMaintenance = applyMaintenanceCheckbox.checked;
         
-        const setupHoursEl = document.getElementById('setup-hours');
-        const setupCostEl = document.getElementById('setup-cost');
-        const apiCostsEl = document.getElementById('api-costs');
-        const maintenanceCostEl = document.getElementById('maintenance-cost');
-        const firstMonthTotalEl = document.getElementById('first-month-total');
-        const ongoingMonthlyEl = document.getElementById('ongoing-monthly');
-        const maintenanceNotice = document.getElementById('maintenance-notice');
-        const apiComplexityNotice = document.getElementById('api-complexity-notice');
+        // Update displays
+        servicesDisplay.textContent = services;
+        rateDisplay.textContent = `$${hourlyRate}`;
+        volumeDisplay.textContent = volumeData.label;
         
-        // Service development hours and complexities
-        const serviceData = {
-            content: {
-                name: 'Monthly Content Generation',
-                baseHours: 15,
-                monthlyHours: 8,
-                apiCost: 0
-            },
-            video: {
-                name: 'Video Spokesperson',
-                baseHours: 20,
-                monthlyHours: 12,
-                apiCost: 99
-            },
-            interactive: {
-                name: 'Interactive AI Agent',
-                baseHours: 30,
-                monthlyHours: 15,
-                apiCost: 99
-            },
-            learning: {
-                name: 'Interactive Learning Modules',
-                baseHours: 25,
-                monthlyHours: 10,
-                apiCost: 89
-            },
-            custom: {
-                name: 'Custom Avatar Creation',
-                baseHours: 15,
-                monthlyHours: 5,
-                apiCost: 250
-            },
-            training: {
-                name: 'AI Literacy Workshops',
-                baseHours: 12,
-                monthlyHours: 4,
-                apiCost: 0
+        // Calculate API costs (additive for multiple platforms)
+        let totalApiCosts = 0;
+        selectedAPIs.forEach(checkbox => {
+            const apiKey = checkbox.value;
+            const apiInfo = apiPricing[apiKey];
+            if (apiInfo) {
+                totalApiCosts += apiInfo.cost;
             }
-        };
+        });
         
-        // API pricing data
-        const apiPricing = {
-            heygen: {
-                name: 'HeyGen',
-                cost: 99
-            },
-            synthesia: {
-                name: 'Synthesia',
-                cost: 89
-            },
-            veo: {
-                name: 'Google Veo',
-                cost: 250
-            }
-        };
-        
-        // Volume multipliers
-        const volumeMultipliers = {
-            1: { label: 'Light', multiplier: 0.7 },
-            2: { label: 'Medium', multiplier: 1.0 },
-            3: { label: 'Heavy', multiplier: 1.5 }
-        };
-        
-        // Calculate function
-        function calculate() {
-            const selectedServices = Array.from(serviceCheckboxes).filter(cb => cb.checked);
-            const services = selectedServices.length;
-            const hourlyRate = parseInt(hourlyRateSlider.value);
-            const selectedAPIs = Array.from(apiCheckboxes).filter(cb => cb.checked);
-            const volume = parseInt(contentVolumeSlider.value);
-            const volumeData = volumeMultipliers[volume];
-            const applyMaintenance = applyMaintenanceCheckbox.checked;
-            
-            // Update displays
-            servicesDisplay.textContent = services;
-            rateDisplay.textContent = `${hourlyRate}`;
-            volumeDisplay.textContent = volumeData.label;
-            
-            // Calculate API costs (additive for multiple platforms)
-            let totalApiCosts = 0;
-            selectedAPIs.forEach(checkbox => {
-                const apiKey = checkbox.value;
-                const apiInfo = apiPricing[apiKey];
-                if (apiInfo) {
-                    totalApiCosts += apiInfo.cost;
-                }
-            });
-            
-            // Add complexity charge for multiple API integrations
-            let apiComplexityMultiplier = 1.0;
-            if (selectedAPIs.length >= 3) {
-                apiComplexityMultiplier = 1.3; // 30% increase for 3 platforms
-            } else if (selectedAPIs.length >= 2) {
-                apiComplexityMultiplier = 1.15; // 15% increase for 2 platforms
-            }
-            
-            // Calculate setup hours
-            let setupHours = 10; // Base setup hours
-            selectedServices.forEach(checkbox => {
-                const serviceKey = checkbox.id.replace('service-', '');
-                const serviceInfo = serviceData[serviceKey];
-                if (serviceInfo) {
-                    setupHours += serviceInfo.baseHours;
-                }
-            });
-            
-            // Apply volume multiplier to setup
-            setupHours = Math.round(setupHours * volumeData.multiplier);
-            
-            // Apply API complexity multiplier for multiple integrations
-            setupHours = Math.round(setupHours * apiComplexityMultiplier);
-            
-            // Calculate monthly maintenance hours
-            let monthlyHours = 0;
-            selectedServices.forEach(checkbox => {
-                const serviceKey = checkbox.id.replace('service-', '');
-                const serviceInfo = serviceData[serviceKey];
-                if (serviceInfo) {
-                    monthlyHours += serviceInfo.monthlyHours;
-                }
-            });
-            monthlyHours = Math.round(monthlyHours * volumeData.multiplier);
-            
-            // Apply API complexity multiplier to maintenance hours
-            monthlyHours = Math.round(monthlyHours * apiComplexityMultiplier);
-            
-            // Calculate costs
-            const setupCost = setupHours * hourlyRate;
-            const maintenanceCost = applyMaintenance ? monthlyHours * hourlyRate : 0;
-            const firstMonthTotal = setupCost + totalApiCosts + maintenanceCost;
-            const ongoingMonthly = totalApiCosts + maintenanceCost;
-            
-            // Update displays
-            setupHoursEl.textContent = `${setupHours} hours`;
-            setupCostEl.textContent = `${setupCost.toLocaleString()}`;
-            apiCostsEl.textContent = `${totalApiCosts.toLocaleString()}`;
-            maintenanceCostEl.textContent = `${maintenanceCost.toLocaleString()}`;
-            firstMonthTotalEl.textContent = `${firstMonthTotal.toLocaleString()}`;
-            ongoingMonthlyEl.textContent = `${ongoingMonthly.toLocaleString()}`;
-            
-            // Show/hide maintenance notice
-            if (applyMaintenance) {
-                maintenanceNotice.style.display = 'block';
-            } else {
-                maintenanceNotice.style.display = 'none';
-            }
-            
-            // Show/hide API complexity notice
-            if (selectedAPIs.length >= 2) {
-                apiComplexityNotice.style.display = 'block';
-            } else {
-                apiComplexityNotice.style.display = 'none';
-            }
-            
-            // Update breakdown
-            updateBreakdown(services, setupHours, hourlyRate, setupCost, totalApiCosts, maintenanceCost, firstMonthTotal, ongoingMonthly, selectedServices, selectedAPIs, volumeData, apiComplexityMultiplier);
+        // Add complexity charge for multiple API integrations
+        let apiComplexityMultiplier = 1.0;
+        if (selectedAPIs.length >= 3) {
+            apiComplexityMultiplier = 1.3; // 30% increase for 3 platforms
+        } else if (selectedAPIs.length >= 2) {
+            apiComplexityMultiplier = 1.15; // 15% increase for 2 platforms
         }
         
-        // Update breakdown details
-        function updateBreakdown(services, setupHours, hourlyRate, setupCost, apiCosts, maintenanceCost, firstMonthTotal, ongoingMonthly, selectedServices, selectedAPIs, volumeData, apiComplexityMultiplier) {
-            let breakdownHTML = '';
+        // Calculate setup hours
+        let setupHours = 10; // Base setup hours
+        selectedServices.forEach(checkbox => {
+            const serviceKey = checkbox.id.replace('service-', '');
+            const serviceInfo = serviceData[serviceKey];
+            if (serviceInfo) {
+                setupHours += serviceInfo.baseHours;
+            }
+        });
+        
+        // Apply volume multiplier to setup
+        setupHours = Math.round(setupHours * volumeData.multiplier);
+        
+        // Apply API complexity multiplier for multiple integrations
+        setupHours = Math.round(setupHours * apiComplexityMultiplier);
+        
+        // Calculate monthly maintenance hours
+        let monthlyHours = 0;
+        selectedServices.forEach(checkbox => {
+            const serviceKey = checkbox.id.replace('service-', '');
+            const serviceInfo = serviceData[serviceKey];
+            if (serviceInfo) {
+                monthlyHours += serviceInfo.monthlyHours;
+            }
+        });
+        monthlyHours = Math.round(monthlyHours * volumeData.multiplier);
+        
+        // Apply API complexity multiplier to maintenance hours
+        monthlyHours = Math.round(monthlyHours * apiComplexityMultiplier);
+        
+        // Calculate costs
+        const setupCost = setupHours * hourlyRate;
+        const maintenanceCost = applyMaintenance ? monthlyHours * hourlyRate : 0;
+        const firstMonthTotal = setupCost + totalApiCosts + maintenanceCost;
+        const ongoingMonthly = totalApiCosts + maintenanceCost;
+        
+        // Update displays
+        setupHoursEl.textContent = `${setupHours} hours`;
+        setupCostEl.textContent = `${setupCost.toLocaleString()}`;
+        apiCostsEl.textContent = `${totalApiCosts.toLocaleString()}`;
+        maintenanceCostEl.textContent = `${maintenanceCost.toLocaleString()}`;
+        firstMonthTotalEl.textContent = `${firstMonthTotal.toLocaleString()}`;
+        ongoingMonthlyEl.textContent = `${ongoingMonthly.toLocaleString()}`;
+        
+        // Show/hide maintenance notice
+        if (applyMaintenance) {
+            maintenanceNotice.style.display = 'block';
+        } else {
+            maintenanceNotice.style.display = 'none';
+        }
+        
+        // Show/hide API complexity notice
+        if (selectedAPIs.length >= 2) {
+            apiComplexityNotice.style.display = 'block';
+        } else {
+            apiComplexityNotice.style.display = 'none';
+        }
+        
+        // Update breakdown
+        updateBreakdown(services, setupHours, hourlyRate, setupCost, totalApiCosts, maintenanceCost, firstMonthTotal, ongoingMonthly, selectedServices, selectedAPIs, volumeData, apiComplexityMultiplier);
+    }
+    
+    // Update breakdown details
+    function updateBreakdown(services, setupHours, hourlyRate, setupCost, apiCosts, maintenanceCost, firstMonthTotal, ongoingMonthly, selectedServices, selectedAPIs, volumeData, apiComplexityMultiplier) {
+        let breakdownHTML = '';
+        
+        if (services > 0) {
+            // Show selected services
+            const serviceNames = selectedServices.map(cb => {
+                const serviceKey = cb.id.replace('service-', '');
+                return serviceData[serviceKey].name;
+            }).join(', ');
             
-            if (services > 0) {
-                // Show selected services
-                const serviceNames = selectedServices.map(cb => {
-                    const serviceKey = cb.id.replace('service-', '');
-                    return serviceData[serviceKey].name;
-                }).join(', ');
-                
+            breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                <span><strong>Selected Services:</strong> ${serviceNames}</span>
+            </div>`;
+            
+            if (selectedAPIs.length > 0) {
+                const apiNames = selectedAPIs.map(cb => apiPricing[cb.value].name).join(', ');
                 breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
-                    <span><strong>Selected Services:</strong> ${serviceNames}</span>
+                    <span><strong>API Platforms:</strong> ${apiNames}</span>
                 </div>`;
-                
-                if (selectedAPIs.length > 0) {
-                    const apiNames = selectedAPIs.map(cb => apiPricing[cb.value].name).join(', ');
-                    breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
-                        <span><strong>API Platforms:</strong> ${apiNames}</span>
-                    </div>`;
-                }
-                
-                breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
-                    <span><strong>Content Volume:</strong> ${volumeData.label} (${volumeData.multiplier}x multiplier)</span>
-                </div>`;
-                
-                if (apiComplexityMultiplier > 1.0) {
-                    breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
-                        <span><strong>API Integration Complexity:</strong> ${selectedAPIs.length} platforms (${apiComplexityMultiplier}x multiplier)</span>
-                    </div>`;
-                }
-                
-                breakdownHTML += `<div class="breakdown-item">
-                    <span>Initial Setup & Development (${setupHours} hours × ${hourlyRate}/hour)</span>
-                    <span><strong>${setupCost.toLocaleString()}</strong></span>
-                </div>`;
-                
-                if (apiCosts > 0) {
-                    breakdownHTML += `<div class="breakdown-item">
-                        <span>Monthly API Platform Costs</span>
-                        <span><strong>${apiCosts.toLocaleString()}</strong></span>
-                    </div>`;
-                }
-                
-                if (maintenanceCost > 0) {
-                    breakdownHTML += `<div class="breakdown-item">
-                        <span>Monthly Maintenance & Updates</span>
-                        <span><strong>${maintenanceCost.toLocaleString()}</strong></span>
-                    </div>`;
-                }
-                
-                breakdownHTML += `<div class="breakdown-item">
-                    <span>Total First Month Investment</span>
-                    <span><strong>${firstMonthTotal.toLocaleString()}</strong></span>
-                </div>`;
-                
-                breakdownHTML += `<div class="breakdown-item">
-                    <span>Monthly Ongoing (After Setup)</span>
-                    <span><strong>${ongoingMonthly.toLocaleString()}</strong></span>
-                </div>`;
-                
-            } else {
-                breakdownHTML = '<p style="color: #7f8c8d; text-align: center;">Please select at least one service package to see pricing.</p>';
             }
             
-            breakdownDetails.innerHTML = breakdownHTML;
+            breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                <span><strong>Content Volume:</strong> ${volumeData.label} (${volumeData.multiplier}x multiplier)</span>
+            </div>`;
+            
+            if (apiComplexityMultiplier > 1.0) {
+                breakdownHTML += `<div class="breakdown-item" style="font-size: 0.9em; color: #7f8c8d;">
+                    <span><strong>API Integration Complexity:</strong> ${selectedAPIs.length} platforms (${apiComplexityMultiplier}x multiplier)</span>
+                </div>`;
+            }
+            
+            breakdownHTML += `<div class="breakdown-item">
+                <span>Initial Setup & Development (${setupHours} hours × $${hourlyRate}/hour)</span>
+                <span><strong>$${setupCost.toLocaleString()}</strong></span>
+            </div>`;
+            
+            if (apiCosts > 0) {
+                breakdownHTML += `<div class="breakdown-item">
+                    <span>Monthly API Platform Costs</span>
+                    <span><strong>$${apiCosts.toLocaleString()}</strong></span>
+                </div>`;
+            }
+            
+            if (maintenanceCost > 0) {
+                breakdownHTML += `<div class="breakdown-item">
+                    <span>Monthly Maintenance & Updates</span>
+                    <span><strong>$${maintenanceCost.toLocaleString()}</strong></span>
+                </div>`;
+            }
+            
+            breakdownHTML += `<div class="breakdown-item">
+                <span>Total First Month Investment</span>
+                <span><strong>$${firstMonthTotal.toLocaleString()}</strong></span>
+            </div>`;
+            
+            breakdownHTML += `<div class="breakdown-item">
+                <span>Monthly Ongoing (After Setup)</span>
+                <span><strong>$${ongoingMonthly.toLocaleString()}</strong></span>
+            </div>`;
+            
+        } else {
+            breakdownHTML = '<p style="color: #7f8c8d; text-align: center;">Please select at least one service package to see pricing.</p>';
         }
         
-        // Update checkbox styling
-        function updateCheckboxStyles() {
-            apiCheckboxes.forEach(checkbox => {
-                const item = checkbox.closest('.checkbox-item');
-                if (checkbox.checked) {
-                    item.classList.add('checked');
-                } else {
-                    item.classList.remove('checked');
-                }
-            });
-        }
-        
-        // Update service card styling
-        function updateServiceCards() {
-            serviceCards.forEach(card => {
-                const checkbox = card.querySelector('.service-checkbox-input');
-                const label = card.querySelector('.service-checkbox label');
-                if (checkbox.checked) {
-                    card.classList.add('selected');
-                    label.textContent = 'Included';
-                } else {
-                    card.classList.remove('selected');
-                    label.textContent = 'Include';
-                }
-            });
-        }
-        
-        // Event listeners
-        hourlyRateSlider.addEventListener('input', calculate);
-        contentVolumeSlider.addEventListener('input', calculate);
-        applyMaintenanceCheckbox.addEventListener('change', calculate);
-        
+        breakdownDetails.innerHTML = breakdownHTML;
+    }
+    
+    // Update checkbox styling
+    function updateCheckboxStyles() {
         apiCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                updateCheckboxStyles();
-                calculate();
-            });
+            const item = checkbox.closest('.checkbox-item');
+            if (checkbox.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
         });
-        
-        // Service card click handlers
+    }
+    
+    // Update service card styling
+    function updateServiceCards() {
         serviceCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Don't toggle if clicking on the checkbox label itself
-                if (e.target.tagName !== 'LABEL' && e.target.tagName !== 'INPUT') {
-                    const checkbox = card.querySelector('.service-checkbox-input');
-                    checkbox.checked = !checkbox.checked;
-                    updateServiceCards();
-                    calculate();
-                }
-            });
+            const checkbox = card.querySelector('.service-checkbox-input');
+            const label = card.querySelector('.service-checkbox label');
+            if (checkbox.checked) {
+                card.classList.add('selected');
+                label.textContent = 'Included';
+            } else {
+                card.classList.remove('selected');
+                label.textContent = 'Include';
+            }
         });
-        
-        serviceCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
+    }
+    
+    // Event listeners
+    hourlyRateSlider.addEventListener('input', calculate);
+    contentVolumeSlider.addEventListener('input', calculate);
+    applyMaintenanceCheckbox.addEventListener('change', calculate);
+    
+    apiCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateCheckboxStyles();
+            calculate();
+        });
+    });
+    
+    // Service card click handlers
+    serviceCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Don't toggle if clicking on the checkbox label itself
+            if (e.target.tagName !== 'LABEL' && e.target.tagName !== 'INPUT') {
+                const checkbox = card.querySelector('.service-checkbox-input');
+                checkbox.checked = !checkbox.checked;
                 updateServiceCards();
                 calculate();
-            });
+            }
         });
-        
-        // Initial calculation
-        updateCheckboxStyles();
-        updateServiceCards();
-        calculate();
-    </script>
+    });
+    
+    serviceCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateServiceCards();
+            calculate();
+        });
+    });
+    
+    // Initial calculation
+    updateCheckboxStyles();
+    updateServiceCards();
+    calculate();
+</script>
+
 </body>
 </html>
